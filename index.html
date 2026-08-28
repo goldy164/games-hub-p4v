@@ -98,7 +98,7 @@
             background-color: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 15px 20px;
+            padding: 20px;
             margin-bottom: 40px;
             font-size: 1.1rem;
             color: #93c5fd;
@@ -114,6 +114,59 @@
 
         .ua-detector-box span.ps-active {
             color: #10b981;
+        }
+
+        /* تنسيق خيارات ويندوز والأزرار */
+        .windows-prompt {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .windows-prompt p {
+            color: var(--text-main);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .prompt-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn-yes {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .btn-yes:hover {
+            background-color: #059669;
+        }
+
+        .btn-no {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .btn-no:hover {
+            background-color: #dc2626;
         }
 
         .sections-grid {
@@ -168,13 +221,11 @@
 </head>
 <body>
 
-    <!-- شريط المطور والشكر العلوي -->
     <div class="dev-banner">
         Developed by <span>Vigito</span> | Special thanks to: <span>Karo, Al-Azif, SiSTRo, Islam Fayed, Modded Firmware</span>
     </div>
 
     <div class="container">
-        <!-- شريط التنقل -->
         <nav>
             <a href="index.html" class="logo">🎮 GameHub - p4v</a>
         </nav>
@@ -182,29 +233,25 @@
         <h1>مرحباً بك في GameHub - p4v</h1>
         <p class="subtitle">دليلك الشامل لتعديل أجهزة البلايستيشن، حماية النظام، وتحميل الألعاب بأمان.</p>
 
-        <!-- أداة User-Agent Check الحقيقية لعرض النظام مباشرة -->
         <div class="ua-detector-box" id="uaBox">
             جاري فحص نظام التشغيل...
         </div>
 
-        <!-- شبكة الأقسام الرئيسية -->
         <div class="sections-grid">
-            <!-- قسم تعديل الـ PS4 -->
             <a href="ps4.html" class="section-card">
                 <h2>🛠️ تعديل أجهزة PS4</h2>
                 <p>دليل شامل لمعرفة الإصدارات، خطوات الأمان، تفعيل الـ DNS، والانتقال المباشر لاستضافات التفعيل مثل Karo.</p>
             </a>
 
-            <!-- قسم تحميل ألعاب الـ PS4 -->
             <a href="games.html" class="section-card">
                 <h2>📥 تحميل وتثبيت ألعاب PS4</h2>
-                <p>تعرف على أشهر المصادر الموثوقة (مثل DLPSGAME و 4Gamer)، كيفية تجميع الأجزاء، وطرق التثبيت.</p>
+                <p>تعرف على أشهر المصادر الموثوقة (مثل DLPSGAME و 4Gamer), كيفية تجميع الأجزاء، وطرق التثبيت.</p>
             </a>
         </div>
     </div>
 
     <footer>
-        <p>GameHub &copy; 2026 - جميع الحقوق محفوظة لمجتمع اللاعبين[cite: 7]</p>
+        <p>GameHub &copy; 2026 - جميع الحقوق محفوظة لمجتمع اللاعبين</p>
     </footer>
 
     <script>
@@ -239,6 +286,27 @@
             // تخصيص شكل رسالة الفحص حسب الجهاز إذا كان بلايستيشن أو جهاز آخر
             if (ua.includes("PlayStation")) {
                 box.innerHTML = `أنت تعمل على: <span class="ps-active">${detectedSystem}</span> (موافق للتعديل)`;
+            } else if (/Windows/i.test(ua)) {
+                // إذا كان النظام Windows، عرض رسالة الكشف مع خيارات التوجه إلى DLPSGAME
+                box.innerHTML = `
+                    انت مش علي بلايستيشن 4، نظام التشغيل: <span>${detectedSystem}</span>
+                    <div class="windows-prompt" id="windowsPrompt">
+                        <p>هل تريد الذهاب إلى موقع DLPSGAME؟</p>
+                        <div class="prompt-buttons">
+                            <button class="btn-yes" id="btnYes">نعم</button>
+                            <button class="btn-no" id="btnNo">✖</button>
+                        </div>
+                    </div>
+                `;
+
+                // تفعيل الأحداث للأزرار الجديدة
+                document.getElementById("btnYes").addEventListener("click", function() {
+                    window.location.href = "https://dlpsgame.com";
+                });
+
+                document.getElementById("btnNo").addEventListener("click", function() {
+                    document.getElementById("windowsPrompt").remove();
+                });
             } else {
                 box.innerHTML = `انت مش علي بلايستيشن 4، نظام التشغيل: <span>${detectedSystem}</span>`;
             }
