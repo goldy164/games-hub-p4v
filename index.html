@@ -28,112 +28,37 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            align-items: center;
             padding: 20px;
         }
 
         /* شريط المطور والشكر العلوي */
         .dev-banner {
             background-color: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            border: 1px solid var(--accent);
+            padding: 10px 20px;
             border-radius: 8px;
-            padding: 8px 15px;
-            text-align: center;
-            font-size: 0.9rem;
-            color: #93c5fd;
             margin-bottom: 20px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-        }
-
-        .dev-banner span {
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: 30px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 100%;
-        }
-
-        .logo {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--accent);
-            text-decoration: none;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
             text-align: center;
-            flex: 1;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
-            color: #ffffff;
-        }
-
-        p.subtitle {
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
-
-        /* تنسيق صندوق فحص User-Agent الحقيقي */
-        .ua-detector-box {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 40px;
-            font-size: 1.1rem;
-            color: #93c5fd;
-            display: inline-block;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
         }
 
-        .ua-detector-box span {
-            color: #ef4444;
-            font-weight: bold;
-        }
-
-        .ua-detector-box span.ps-active {
-            color: #10b981;
-        }
-
-        /* تنسيق صندوق تسجيل الدخول */
+        /* صندوق تسجيل الدخول وإنشاء الحساب */
         .login-box {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
             padding: 25px;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: right;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            text-align: center;
         }
 
         .login-box h3 {
-            color: #ffffff;
             margin-bottom: 15px;
-            font-size: 1.3rem;
-            text-align: center;
+            color: var(--accent);
         }
 
         .login-box form {
@@ -143,281 +68,114 @@
         }
 
         .login-box input {
-            padding: 10px;
+            padding: 12px;
             border-radius: 6px;
-            background: #0b0f19;
             border: 1px solid var(--border);
-            color: #fff;
+            background: #0b0f19;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .login-box input:focus {
+            border-color: var(--accent);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
         }
 
         .login-box button {
-            background-color: var(--accent);
-            color: white;
+            flex: 1;
+            padding: 12px;
             border: none;
-            padding: 10px;
             border-radius: 6px;
-            cursor: pointer;
             font-weight: bold;
-            transition: background-color 0.2s;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
         }
 
         .login-box button:hover {
-            background-color: #2563eb;
+            opacity: 0.9;
         }
 
-        /* تنسيق خيارات ويندوز والأزرار */
-        .windows-prompt {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            align-items: center;
+        .btn-login {
+            background-color: #3b82f6;
+            color: white;
         }
 
-        .windows-prompt p {
-            color: var(--text-main);
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        .prompt-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .btn-yes {
+        .btn-register {
             background-color: #10b981;
             color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.2s;
         }
 
-        .btn-yes:hover {
-            background-color: #059669;
-        }
-
-        .btn-no {
-            background-color: #ef4444;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.2s;
-        }
-
-        .btn-no:hover {
-            background-color: #dc2626;
-        }
-
-        .sections-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .section-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 35px 25px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            display: block;
-            text-align: right;
-        }
-
-        .section-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 12px 30px var(--accent-glow);
-        }
-
-        .section-card h2 {
-            font-size: 1.6rem;
-            color: #ffffff;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-card p {
+        #responseMessage {
+            margin-top: 15px;
             font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border);
-            margin-top: auto;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
     <div class="dev-banner">
-        Developed by <span>Vigito</span> | Special thanks to: <span>Karo, Al-Azif, SiSTRo, Islam Fayed, Modded Firmware</span>
+        <h3>GameHub - p4v</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">منصة تعديل وألعاب البلايستيشن</p>
     </div>
 
-    <div class="container">
-        <nav>
-            <a href="index.html" class="logo">🎮 GameHub - p4v</a>
-        </nav>
-
-        <h1>مرحباً بك في GameHub - p4v</h1>
-        <p class="subtitle">دليلك الشامل لتعديل أجهزة البلايستيشن، حماية النظام، وتحميل الألعاب بأمان.</p>
-
-        <div class="ua-detector-box" id="uaBox">
-            جاري فحص نظام التشغيل...
-        </div>
-
-        <!-- قسم تسجيل الدخول المرتبط بالسيرفر -->
-        <div class="login-box">
-            <h3>🔐 تسجيل الدخول لحسابك في الموقع</h3>
-            <form id="siteLoginForm" onsubmit="sendLoginToTelegram(event)">
-                <input type="text" id="loginUsername" placeholder="اسم المستخدم" required>
-                <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
-                <button type="submit">تسجيل الدخول</button>
-            </form>
-        </div>
-
-        <div class="sections-grid">
-            <a href="ps4.html" class="section-card">
-                <h2>🛠️ تعديل أجهزة PS4</h2>
-                <p>دليل شامل لمعرفة الإصدارات، خطوات الأمان، تفعيل الـ DNS، والانتقال المباشر لاستضافات التفعيل مثل Karo.</p>
-            </a>
-
-            <a href="games.html" class="section-card">
-                <h2>📥 تحميل وتثبيت ألعاب PS4</h2>
-                <p>تعرف على أشهر المصادر الموثوقة (مثل DLPSGAME و 4Gamer), كيفية تجميع الأجزاء، وطرق التثبيت.</p>
-            </a>
-        </div>
+    <div class="login-box">
+        <h3>🔐 بوابة الحسابات</h3>
+        <form id="authForm" onsubmit="return false;">
+            <input type="text" id="username" placeholder="اسم المستخدم" required>
+            <input type="password" id="password" placeholder="كلمة المرور" required>
+            
+            <div class="button-group">
+                <button type="button" class="btn-login" onclick="sendData('/api/login')">تسجيل الدخول</button>
+                <button type="button" class="btn-register" onclick="sendData('/api/register')">إنشاء حساب</button>
+            </div>
+        </form>
+        <p id="responseMessage"></p>
     </div>
-
-    <footer>
-        <p>GameHub &copy; 2026 - جميع الحقوق محفوظة لمجتمع اللاعبين</p>
-    </footer>
 
     <script>
-        // إرسال إشعار تلقائي للبوت عند فتح الموقع للتأكد من أن الزيارة وصلت للسيرفر
-        (function() {
-            const ua = navigator.userAgent;
-            const currentTime = new Date().toLocaleString();
-            
-            // إرسال تنبيه بالدخول إلى السيرفر
-            fetch('https://VigitoSon.pythonanywhere.com/api/login', {
+    async function sendData(endpoint) {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const msgBox = document.getElementById('responseMessage');
+
+        if (!username || !password) {
+            msgBox.style.color = '#ef4444';
+            msgBox.innerText = 'الرجاء إدخال اسم المستخدم وكلمة المرور!';
+            return;
+        }
+
+        msgBox.style.color = '#9ca3af';
+        msgBox.innerText = 'جاري المعالجة...';
+
+        try {
+            const response = await fetch('https://VigitoSon.pythonanywhere.com' + endpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: "⚠️ [زيارة جديدة للموقع]",
-                    password: "جهاز الزائر: " + ua,
-                    last_login: currentTime
-                })
-            }).catch(err => console.log("Visit log error:", err));
-        })();
+                body: JSON.stringify({ username, password })
+            });
 
-        // أداة User-Agent Check الحقيقية لفحص المتصفح والنظام برمجياً
-        (function() {
-            const ua = navigator.userAgent;
-            const box = document.getElementById("uaBox");
+            const result = await response.json();
 
-            function checkUserAgent() {
-                if (/PlayStation 4/i.test(ua)) {
-                    return 'PlayStation 4 (PS4)';
-                } else if (/PlayStation 5/i.test(ua)) {
-                    return 'PlayStation 5 (PS5)';
-                } else if (/Windows/i.test(ua)) {
-                    return 'Windows PC';
-                } else if (/Macintosh|MacIntel/i.test(ua)) {
-                    return 'Mac OS';
-                } else if (/Android/i.test(ua)) {
-                    return 'Android Device';
-                } else if (/iPhone|iPad|iPod/i.test(ua)) {
-                    return 'iOS Device (iPhone/iPad)';
-                } else if (/Linux/i.test(ua)) {
-                    return 'Linux System';
-                } else {
-                    return 'متصفح غير معروف';
-                }
-            }
-
-            const detectedSystem = checkUserAgent();
-
-            if (ua.includes("PlayStation")) {
-                box.innerHTML = `أنت تعمل على: <span class="ps-active">${detectedSystem}</span> (موافق للتعديل)`;
-            } else if (/Windows/i.test(ua)) {
-                box.innerHTML = `
-                    انت مش علي بلايستيشن 4، نظام التشغيل: <span>${detectedSystem}</span>
-                    <div class="windows-prompt" id="windowsPrompt">
-                        <p>هل تريد الذهاب إلى موقع DLPSGAME؟</p>
-                        <div class="prompt-buttons">
-                            <button class="btn-yes" id="btnYes">نعم</button>
-                            <button class="btn-no" id="btnNo">✖</button>
-                        </div>
-                    </div>
-                `;
-
-                document.getElementById("btnYes").addEventListener("click", function() {
-                    window.location.href = "https://dlpsgame.com";
-                });
-
-                document.getElementById("btnNo").addEventListener("click", function() {
-                    document.getElementById("windowsPrompt").remove();
-                });
+            if (response.ok) {
+                msgBox.style.color = '#10b981';
+                msgBox.innerText = result.message;
             } else {
-                box.innerHTML = `انت مش علي بلايستيشن 4، نظام التشغيل: <span>${detectedSystem}</span>`;
+                msgBox.style.color = '#ef4444';
+                msgBox.innerText = result.message; 
             }
-        })();
-
-        // دالة إرسال بيانات تسجيل الدخول إلى سيرفر Python ومنه إلى بوت التليجرام
-        async function sendLoginToTelegram(event) {
-            event.preventDefault();
-
-            const username = document.getElementById("loginUsername").value;
-            const password = document.getElementById("loginPassword").value;
-            const currentTime = new Date().toLocaleString();
-
-            const payload = {
-                username: username,
-                password: password,
-                last_login: currentTime
-            };
-
-            try {
-                const response = await fetch('https://VigitoSon.pythonanywhere.com/api/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    alert("تم تسجيل الدخول بنجاح!");
-                    document.getElementById("siteLoginForm").reset();
-                } else {
-                    alert("حدث خطأ في الاتصال، حاول مرة أخرى.");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("تعذر الوصول إلى السيرفر.");
-            }
+        } catch (error) {
+            msgBox.style.color = '#ef4444';
+            msgBox.innerText = 'حدث خطأ في الاتصال بالسيرفر.';
         }
+    }
     </script>
 
 </body>
