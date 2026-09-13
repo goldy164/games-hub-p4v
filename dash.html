@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - GameHub - p4v[VIGITO]</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --border: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .dev-banner {
+            background-color: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 8px 15px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #93c5fd;
+            margin-bottom: 20px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        .dev-banner span {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .logout-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            flex: 1;
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        .ua-detector-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+            font-size: 1.1rem;
+            color: #93c5fd;
+            display: inline-block;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .ua-detector-box span {
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .ua-detector-box span.ps-active {
+            color: #10b981;
+        }
+
+        .windows-prompt {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .windows-prompt p {
+            color: var(--text-main);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .prompt-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn-yes {
+            background-color: #10b981;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-no {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .sections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 35px 25px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+            display: block;
+            text-align: right;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 12px 30px var(--accent-glow);
+        }
+
+        .section-card h2 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="dev-banner">
+        Developed by <span>Vigito</span> | Special thanks to: <span>Karo, Al-Azif, SiSTRo, Islam Fayed, Modded Firmware</span>
+    </div>
+
+    <div class="container">
+        <nav>
+            <a href="dash.html" class="logo">🎮 GameHub - p4v</a>
+            <a href="index.html" class="logout-btn">تسجيل الخروج</a>
+        </nav>
+
+        <h1>مرحباً بك في لوحة التحكم</h1>
+        <p class="subtitle">دليلك الشامل لتعديل أجهزة البلايستيشن، حماية النظام، وتحميل الألعاب بأمان.</p>
+
+        <div class="ua-detector-box" id="uaBox">
+            جاري فحص نظام التشغيل...
+        </div>
+
+        <div class="sections-grid">
+            <a href="ps4.html" class="section-card">
+                <h2>🛠️ تعديل أجهزة PS4</h2>
+                <p>دليل شامل لمعرفة الإصدارات، خطوات الأمان، تفعيل الـ DNS، والانتقال المباشر لاستضافات التفعيل مثل Karo.</p>
+            </a>
+
+            <a href="games.html" class="section-card">
+                <h2>📥 تحميل وتثبيت ألعاب PS4</h2>
+                <p>تعرف على أشهر المصادر الموثوقة (مثل DLPSGAME و 4Gamer), كيفية تجميع الأجزاء، وطرق التثبيت.</p>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <p>GameHub &copy; 2026 - جميع الحقوق محفوظة لمجتمع اللاعبين</p>
+    </footer>
+
+    <script>
+        (function() {
+            const ua = navigator.userAgent;
+            const box = document.getElementById("uaBox");
+
+            function checkUserAgent() {
+                if (/PlayStation 4/i.test(ua)) {
+                    return 'PlayStation 4 (PS4)';
+                } else if (/PlayStation 5/i.test(ua)) {
+                    return 'PlayStation 5 (PS5)';
+                } else if (/Windows/i.test(ua)) {
+                    return 'Windows PC';
+                } else if (/Macintosh|MacIntel/i.test(ua)) {
+                    return 'Mac OS';
+                } else if (/Android/i.test(ua)) {
+                    return 'Android Device';
+                } else if (/iPhone|iPad|iPod/i.test(ua)) {
+                    return 'iOS Device (iPhone/iPad)';
+                } else if (/Linux/i.test(ua)) {
+                    return 'Linux System';
+                } else {
+                    return 'متصفح غير معروف';
+                }
+            }
+
+            const detectedSystem = checkUserAgent();
+
+            if (ua.includes("PlayStation")) {
+                box.innerHTML = `أنت تعمل على: <span class="ps-active">${detectedSystem}</span> (موافق للتعديل)`;
+            } else if (/Windows/i.test(ua)) {
+                box.innerHTML = `
+                    انت مش علي بلايستيشن 4، نظام التشغيل: <span>${detectedSystem}</span>
+                    <div class="windows-prompt" id="windowsPrompt">
+                        <p>هل تريد الذهاب إلى موقع DLPSGAME؟</p>
+                        <div class="prompt-buttons">
+                            <button class="btn-yes" id="btnYes">نعم</button>
+                            <button class="btn-no" id="btnNo">✖</button>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById("btnYes").addEventListener("click", function() {
+                    window.location.href = "https://dlpsgame.com";
+                });
+
+                document.getElementById("btnNo").addEventListener("click", function() {
+                    document.getElementById("windowsPrompt").remove();
+                });
+            } else {
+                box.innerHTML = `انت مش علي بلايستيشن 4، نظام التشغيل: <span>${detectedSystem}</span>`;
+            }
+        })();
+    </script>
+
+</body>
+</html>
