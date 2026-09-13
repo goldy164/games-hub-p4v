@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - GameHub - p4v</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.3);
+            --border: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .auth-container {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 12px 30px var(--accent-glow);
+            text-align: center;
+        }
+
+        .auth-container h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form input {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #0b0f19;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .auth-form input:focus {
+            border-color: var(--accent);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .auth-form button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .auth-form button:hover {
+            opacity: 0.9;
+        }
+
+        .btn-login {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        .btn-register {
+            background-color: #10b981;
+            color: white;
+        }
+
+        #responseMessage {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2>🎮 GameHub - p4v</h2>
+        <p style="color: var-text-muted; margin-bottom: 20px; font-size: 0.9rem;">سجل دخولك أو أنشئ حساباً جديداً للتابعة</p>
+        
+        <form id="authForm" onsubmit="return false;" class="auth-form">
+            <input type="text" id="username" placeholder="اسم المستخدم" required>
+            <input type="password" id="password" placeholder="كلمة المرور" required>
+            
+            <div class="button-group">
+                <button type="button" class="btn-login" onclick="sendData('/api/login')">تسجيل الدخول</button>
+                <button type="button" class="btn-register" onclick="sendData('/api/register')">إنشاء حساب</button>
+            </div>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+    async function sendData(endpoint) {
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const msgBox = document.getElementById('responseMessage');
+
+        if (!username || !password) {
+            msgBox.style.color = '#ef4444';
+            msgBox.innerText = 'الرجاء إدخال اسم المستخدم وكلمة المرور!';
+            return;
+        }
+
+        msgBox.style.color = '#9ca3af';
+        msgBox.innerText = 'جاري التحقق...';
+
+        try {
+            const response = await fetch('https://VigitoSon.pythonanywhere.com' + endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                msgBox.style.color = '#10b981';
+                msgBox.innerText = result.message + ' جاري تحويلك...';
+                
+                // التوجيه التلقائي إلى صفحة الداشبورد بعد النجاح بثانية
+                setTimeout(() => {
+                    window.location.href = 'dash.html';
+                }, 1000);
+            } else {
+                msgBox.style.color = '#ef4444';
+                msgBox.innerText = result.message; // يعرض لو الحساب غير موجود أو الباسورد خطأ أو الاسم مكرر
+            }
+        } catch (error) {
+            msgBox.style.color = '#ef4444';
+            msgBox.innerText = 'حدث خطأ في الاتصال بالسيرفر.';
+        }
+    }
+    </script>
+
+</body>
+</html>
