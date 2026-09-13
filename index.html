@@ -36,12 +36,35 @@
         .dev-banner {
             background-color: rgba(59, 130, 246, 0.1);
             border: 1px solid var(--accent);
-            padding: 10px 20px;
+            padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
             text-align: center;
             width: 100%;
-            max-width: 500px;
+            max-width: 800px;
+        }
+
+        /* تنسيق القوائم والأقسام */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .section-card h2 {
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
         }
 
         /* صندوق تسجيل الدخول وإنشاء الحساب */
@@ -51,9 +74,10 @@
             padding: 25px;
             border-radius: 12px;
             width: 100%;
-            max-width: 500px;
+            max-width: 800px;
             box-shadow: 0 4px 20px var(--accent-glow);
             text-align: center;
+            margin-bottom: 20px;
         }
 
         .login-box h3 {
@@ -121,11 +145,13 @@
 </head>
 <body>
 
+    <!-- الشريط العلوي -->
     <div class="dev-banner">
-        <h3>GameHub - p4v</h3>
-        <p style="color: var(--text-muted); font-size: 0.9rem;">منصة تعديل وألعاب البلايستيشن</p>
+        <h2>GameHub - p4v</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">الدليل الشامل لتعديل أجهزة البلاستيشن، حماية النظام، وتحميل الألعاب بأمان.</p>
     </div>
 
+    <!-- صندوق تسجيل الدخول وإنشاء الحساب -->
     <div class="login-box">
         <h3>🔐 بوابة الحسابات</h3>
         <form id="authForm" onsubmit="return false;">
@@ -138,6 +164,19 @@
             </div>
         </form>
         <p id="responseMessage"></p>
+    </div>
+
+    <!-- القوائم والأقسام الرئيسية -->
+    <div class="container">
+        <div class="section-card">
+            <h2>🛠️ تعديل أجهزة PS4</h2>
+            <p style="color: var(--text-muted);">دليل شامل لمعرفة الإصدارات، خطوات الأمان، تفعيل الـ DNS، والانتقال المباشر لاستضافات التفعيل مثل Karo.</p>
+        </div>
+
+        <div class="section-card">
+            <h2>🎮 الألعاب والمتاجر</h2>
+            <p style="color: var(--text-muted);">أحدث الأدوات والطرق لتثبيت الألعاب وإدارة الحسابات بكل سهولة.</p>
+        </div>
     </div>
 
     <script>
